@@ -1,91 +1,495 @@
+
+Gemini
+Nova conversa
+Pesquisar conversas
+Imagens
+Biblioteca
+Novo notebook
+Bemhes representação
+Panela IVP
+Todos os notebooks
+Criação de Website de Controle de Gás
+Fallido Intento de Resumen
+Propriedades do Isolante Térmico
+Modificação de Site com Filtro de Produtos
+Adicionando Segunda Imagem ao Cabeçalho
+Redefinição Tipográfica de Luxo
+Resumo Técnico NCH CERTOP
+Criação de Imagem do Shiny-Side
+Criação de Imagem do Enforce NCH
+Geração de Imagem Resist-X NCH
+Criação de Imagem Oil-All Xtreme
+Criação de Imagem Hoc Xtreme
+Criação de Imagem Spectra Xtrema
+Aplicação do Diesel Mate no Campo
+Criação de Imagem Industrial
+Criação de Imagem da Graxa Premalube
+Criação de Imagem da Graxa Premalube
+Inserção de Imagens em Cards
+Como Inserir Imagem no Site
+Resumo de Normas de Lubrificantes
+Melhorias para Citação Bíblica
+Criar Site Conversor Texto Manuscrito
+Criação de Site de Portfólio Industrial
+Como Desativar a IA do WhatsApp
+Para Que Serve Ostibind
+Conhecendo a NCH Brasil
+Limitação na Criação de Sites
+Conexão do Gmail Necessária
+Criação de Site para Bemhes Representação
+Criação de Site Comercial Bemhes
+Criação de Página Web para Produtos
+Criação de Página Web para Produtos
+Ajustes Finais para Publicação do Site
+Criação de Página Inicial Profissional
+Criação de Site para Bemhes
+Criação de Site com Botões de Contato
+Criação de Site para Representação Bemhes
+Criação de Site com Formulários e Links
+Criação de Site para Diesel Mate
+Criação de Site para Bemhes Representação
+Criação de Site com Cotação e Contato
+Criação de Site com HTML, CSS e JS
+Sem título
+Sem título
+Otimização de Fotografia Profissional
+Diesel-Mate GitHub Repository Overview
+Conversa com o Gemini
+crie um site baseado no aquivo em anexo
+
+Foi criado um website completo e interativo com base nos dados do ficheiro CONTROLE DE GÁS.xlsx.
+
+🌐 O que está incluído no site:
+Painel Geral (Dashboard):
+
+Métricas Chave (KPIs): Média de duração de cada botijão (~62 dias), Custo médio por botijão (R$ 108,67), Total de pedidos cadastrados e indicação do gás em uso no momento.
+
+Gráfico de Evolução da Duração: Gráfico de linha interativo que exibe a oscilação de dias de consumo por botijão ao longo do tempo.
+
+Gráfico de Fornecedores: Gráfico do tipo doughnut mostrando a distribuição de compras por fornecedor (ex.: Gás Corpinho, Amigão Supermercado, Bruno Gás, Paraná Gás).
+
+Histórico de Pedidos / Lançamentos:
+
+Tabela com o registo de todas as 19 compras com data de compra, valores unitários, início/fim de uso, duração em dias e badges de status (Finalizado vs. Em Uso).
+
+Formato dinâmico e amigável.
+
+Locais de Compra:
+
+Secção explicativa listando os fornecedores e respetivas cidades registadas (Mandaguari e Mandaguara).
+
+Formulário de Registo Dinâmico:
+
+Botão para adicionar um novo registo/pedido de botijão de gás diretamente na interface, atualizando os dados e a tabela instantaneamente.
+
+💾 Ficheiro Gerado:
+Pode transferir ou abrir o ficheiro HTML abaixo diretamente em qualquer navegador (Chrome, Edge, Firefox, Safari):
+
+Ícone do app HTML
+site_controle_de_gas
+ HTML 
+
+
+
+O Gemini é uma IA e pode cometer erros.
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BEMHES • Controle de Vendas</title>
-<style>
-:root{--nav:#0b1f3a;--pri:#1769e0;--bg:#f5f7fb;--card:#fff;--txt:#172033;--mut:#64748b;--line:#e5e7eb;--ok:#16a34a;--warn:#d97706;--bad:#dc2626}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--txt)}
-aside{position:fixed;left:0;top:0;bottom:0;width:235px;background:var(--nav);color:#fff;padding:20px 14px;z-index:4}.brand{font-size:20px;font-weight:800;padding:5px 10px 25px}.brand b{color:#48a8ff}
-nav button{display:block;width:100%;border:0;background:none;color:#cbd5e1;text-align:left;padding:12px;border-radius:9px;margin:4px 0;font-size:14px;cursor:pointer}nav button:hover,nav button.sel{background:#1557bd;color:white}
-main{margin-left:235px;padding:24px;max-width:1500px}.page{display:none}.page.on{display:block}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}h1{margin:0;font-size:26px}.mut{color:var(--mut);font-size:14px;margin-top:4px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.card,.box{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px;box-shadow:0 2px 8px #0f172a0b}.kpi{font-size:25px;font-weight:800;margin-top:8px}.label{color:var(--mut);font-size:13px}
-.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}.box h2{font-size:17px;margin:0 0 14px}
-.btn{border:0;border-radius:8px;background:var(--pri);color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}.btn.ok{background:var(--ok)}.btn.gray{background:#e2e8f0;color:#334155}.btn.red{background:var(--bad)}.btn.sm{padding:6px 9px;font-size:12px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}.search,input,select,textarea{border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff;width:100%}.search{width:260px}
-table{border-collapse:collapse;width:100%}th,td{padding:10px 7px;border-bottom:1px solid var(--line);font-size:13px;text-align:left}th{color:var(--mut);font-size:11px;text-transform:uppercase}
-.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#dcfce7;color:#166534;font-size:11px}.badge.warn{background:#fef3c7;color:#92400e}.badge.bad{background:#fee2e2;color:#991b1b}
-.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.fg label{display:block;color:var(--mut);font-size:12px;margin-bottom:5px}.full{grid-column:1/-1}
-.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;padding:14px;z-index:10}.modal.show{display:flex}.modalbox{background:#fff;border-radius:14px;width:min(850px,100%);max-height:92vh;overflow:auto;padding:22px}.modalbox h2{margin-top:0}
-.items{margin-top:15px}.item{display:grid;grid-template-columns:2fr .65fr 1fr 35px;gap:7px;margin:7px 0}.total{text-align:right;font-size:22px;font-weight:800;margin:14px 0}.login{position:fixed;inset:0;background:linear-gradient(135deg,#071a33,#1769e0);display:flex;align-items:center;justify-content:center;z-index:20}.loginbox{background:#fff;width:min(390px,92%);padding:28px;border-radius:16px}.loginbox h1{text-align:center;margin-bottom:20px}.loginbox input{margin-bottom:10px}.loginbox small{color:var(--mut)}
-canvas{width:100%;height:220px;border:1px solid var(--line);border-radius:10px}
-@media(max-width:900px){aside{width:66px;padding:14px 7px}.brand{font-size:0;text-align:center}.brand:after{content:"BV";font-size:19px}.brand b{display:none}nav button{font-size:0;text-align:center}nav button:first-letter{font-size:20px}main{margin-left:66px;padding:14px}.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
-@media(max-width:560px){.cards{grid-template-columns:1fr 1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}.item{grid-template-columns:1fr 65px 90px 35px}.search{width:100%}h1{font-size:21px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA DE CONTROLE DE GÁS - DASHBOARD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: var(--accent-color);
+        }
+        .kpi-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-3px);
+        }
+        .kpi-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .badge-status-em-uso {
+            background-color: #ffeaa7;
+            color: #d63031;
+            font-weight: bold;
+        }
+        .badge-status-finalizado {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+    </style>
 </head>
 <body>
-<div class="login" id="login"><div class="loginbox"><h1>BEMHES <span style="color:#1769e0">Vendas</span></h1><input id="user" placeholder="Usuário" value="admin"><input id="pass" type="password" placeholder="Senha" value="1234"><button class="btn" style="width:100%" onclick="enter()">Entrar</button><p><small>Demo: usuário <b>admin</b> / senha <b>1234</b></small></p></div></div>
 
-<aside><div class="brand">BEMHES <b>Vendas</b></div><nav>
-<button class="sel" onclick="go('dash',this)">📊 Dashboard</button>
-<button onclick="go('clientes',this)">👥 Clientes</button>
-<button onclick="go('produtos',this)">📦 Produtos</button>
-<button onclick="go('vendas',this)">🛒 Vendas</button>
-<button onclick="go('orcamentos',this)">📄 Orçamentos</button>
-<button onclick="go('financeiro',this)">💰 Financeiro</button>
-<button onclick="go('relatorios',this)">📈 Relatórios</button>
-<button onclick="logout()">🚪 Sair</button>
-</nav></aside>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <div class="d-flex align-items-center mb-4 text-white text-decoration-none">
+                <i class="bi bi-fire me-2 text-warning fs-3"></i>
+                <span class="fs-4 fw-bold">GásControl</span>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-bs-toggle="tab" onclick="switchTab('dashboard')">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard / Painel
+                    </a>
+                </li>
+                <li>
+                    <a href="#pedidos" class="nav-link" data-bs-toggle="tab" onclick="switchTab('pedidos')">
+                        <i class="bi bi-journal-text me-2"></i> Histórico de Pedidos
+                    </a>
+                </li>
+                <li>
+                    <a href="#locais" class="nav-link" data-bs-toggle="tab" onclick="switchTab('locais')">
+                        <i class="bi bi-geo-alt me-2"></i> Locais de Compra
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-<main>
-<section id="dash" class="page on"><div class="head"><div><h1>Dashboard</h1><div class="mut">Visão geral do negócio</div></div><button class="btn" onclick="newSale()">+ Nova venda</button></div>
-<div class="cards"><div class="card"><div class="label">Vendas</div><div id="kSales" class="kpi">R$ 0,00</div></div><div class="card"><div class="label">Recebido</div><div id="kPaid" class="kpi">R$ 0,00</div></div><div class="card"><div class="label">A receber</div><div id="kOpen" class="kpi">R$ 0,00</div></div><div class="card"><div class="label">Clientes</div><div id="kClients" class="kpi">0</div></div></div>
-<div class="grid"><div class="box"><h2>Vendas recentes</h2><div id="dashSales"></div></div><div class="box"><h2>Indicadores</h2><p>Ticket médio: <b id="ticket">R$ 0,00</b></p><p>Produtos cadastrados: <b id="nProd">0</b></p><p>Estoque baixo: <b id="nLow">0</b></p><p>Orçamentos em aberto: <b id="nBud">0</b></p></div></div></section>
+        <!-- Conteúdo Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            
+            <!-- Tab Dashboard -->
+            <div id="tab-dashboard" class="tab-content-item">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-speedometer2"></i> Dashboard de Controle</h1>
+                    <button class="btn btn-warning text-white fw-bold" data-bs-toggle="modal" data-bs-target="#modalNovoPedido">
+                        <i class="bi bi-plus-circle me-1"></i> Novo Botijão / Pedido
+                    </button>
+                </div>
 
-<section id="clientes" class="page"><div class="head"><div><h1>Clientes</h1><div class="mut">Cadastro comercial</div></div><button class="btn" onclick="clientModal()">+ Cliente</button></div><div class="box"><div class="tools"><input class="search" placeholder="Pesquisar..." oninput="renderClients(this.value)"></div><div id="clients"></div></div></section>
-<section id="produtos" class="page"><div class="head"><div><h1>Produtos</h1><div class="mut">Produtos, preços e estoque</div></div><button class="btn" onclick="productModal()">+ Produto</button></div><div class="box"><div class="tools"><input class="search" placeholder="Pesquisar..." oninput="renderProducts(this.value)"></div><div id="products"></div></div></section>
-<section id="vendas" class="page"><div class="head"><div><h1>Vendas</h1><div class="mut">Pedidos faturados</div></div><button class="btn" onclick="newSale()">+ Nova venda</button></div><div class="box"><div id="sales"></div></div></section>
-<section id="orcamentos" class="page"><div class="head"><div><h1>Orçamentos</h1><div class="mut">Propostas comerciais</div></div><button class="btn" onclick="budgetModal()">+ Orçamento</button></div><div class="box"><div id="budgets"></div></div></section>
-<section id="financeiro" class="page"><div class="head"><div><h1>Financeiro</h1><div class="mut">Contas a receber</div></div></div><div class="box"><div id="finance"></div></div></section>
-<section id="relatorios" class="page"><div class="head"><div><h1>Relatórios</h1><div class="mut">Resumo de desempenho</div></div><button class="btn gray" onclick="exportData()">Exportar dados</button></div><div class="cards"><div class="card"><div class="label">Faturamento</div><div class="kpi" id="rTotal">R$ 0,00</div></div><div class="card"><div class="label">Custo estimado</div><div class="kpi" id="rCost">R$ 0,00</div></div><div class="card"><div class="label">Margem estimada</div><div class="kpi" id="rMargin">R$ 0,00</div></div><div class="card"><div class="label">Vendas</div><div class="kpi" id="rCount">0</div></div></div><div class="box"><h2>Produtos mais vendidos</h2><div id="rProducts"></div></div></section>
-</main>
+                <!-- KPIs -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Média de Duração</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-media-duracao">61.8 dias</h3>
+                                </div>
+                                <i class="bi bi-calendar-event kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Custo Médio / Botijão</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-custo-medio">R$ 108.67</h3>
+                                </div>
+                                <i class="bi bi-cash-stack kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Total de Pedidos</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-total-pedidos">19</h3>
+                                </div>
+                                <i class="bi bi-box-seam kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Gás em Uso Atual</h6>
+                                    <h3 class="mb-0 fw-bold text-danger" id="kpi-gas-uso">#19 (25/08/26)</h3>
+                                </div>
+                                <i class="bi bi-fire kpi-icon text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="modal" id="modal"><div class="modalbox" id="modalContent"></div></div>
+                <!-- Gráficos -->
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="table-container">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-graph-up-arrow"></i> Evolução da Duração (Dias por Botijão)</h5>
+                            <canvas id="chartDuracao" height="120"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="table-container">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-pie-chart"></i> Compras por Fornecedor</h5>
+                            <canvas id="chartFornecedores" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Pedidos -->
+            <div id="tab-pedidos" class="tab-content-item d-none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-journal-text"></i> Histórico Completo de Pedidos</h1>
+                    <button class="btn btn-warning text-white fw-bold" data-bs-toggle="modal" data-bs-target="#modalNovoPedido">
+                        <i class="bi bi-plus-circle me-1"></i> Registrar Compra
+                    </button>
+                </div>
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="tabelaPedidos">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Local de Compra</th>
+                                    <th>Data Compra</th>
+                                    <th>Qtd</th>
+                                    <th>Valor Unit. (R$)</th>
+                                    <th>Início Uso</th>
+                                    <th>Fim Uso</th>
+                                    <th>Duração (dias)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Locais -->
+            <div id="tab-locais" class="tab-content-item d-none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-geo-alt"></i> Locais de Compra Cadastrados</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-container">
+                            <table class="table table-striped" id="tabelaLocais">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Local de Compra</th>
+                                        <th>Cidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>AMIGÃO SUPERMECADO</td><td>MANDAGUARI</td></tr>
+                                    <tr><td>BRUNO GÁS</td><td>Mandaguari</td></tr>
+                                    <tr><td>Gás Corpinho</td><td>Mandaguari</td></tr>
+                                    <tr><td>PARANÁ GÁS</td><td>MANDAGUARA</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- Modal Novo Pedido -->
+<div class="modal fade" id="modalNovoPedido" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle"></i> Novo Lançamento de Gás</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formPedido">
+            <div class="mb-3">
+                <label class="form-label">Local de Compra</label>
+                <select class="form-select" id="inputLocal" required>
+                    <option value="Gás Corpinho">Gás Corpinho</option>
+                    <option value="AMIGÃO SUPERMECADO">AMIGÃO SUPERMECADO</option>
+                    <option value="BRUNO GÁS">BRUNO GÁS</option>
+                    <option value="PARANÁ GÁS">PARANÁ GÁS</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Data de Compra</label>
+                <input type="date" class="form-control" id="inputDataCompra" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Valor Unitário (R$)</label>
+                <input type="number" step="0.01" class="form-control" id="inputValor" required value="125.00">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Início do Uso</label>
+                <input type="date" class="form-control" id="inputInicioUso" required>
+            </div>
+            <button type="submit" class="btn btn-warning text-white w-100 fw-bold">Salvar Registro</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const KEY='bemhes_vendas_v2';
-let db=JSON.parse(localStorage.getItem(KEY)||'null')||{clients:[],products:[],sales:[],budgets:[]};
-const $=id=>document.getElementById(id), money=v=>(+v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}), uid=()=>Date.now()+Math.random();
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-function persist(){localStorage.setItem(KEY,JSON.stringify(db))}
-function enter(){if(user.value==='admin'&&pass.value==='1234'){$('login').style.display='none';sessionStorage.login='1'}else alert('Usuário ou senha inválidos.')}
-function logout(){sessionStorage.clear();$('login').style.display='flex'}
-if(sessionStorage.login==='1')$('login').style.display='none';
-function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));$(id).classList.add('on');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel');render()}
-function close(){ $('modal').classList.remove('show')}
-function show(content){$('modalContent').innerHTML=content;$('modal').classList.add('show')}
-function clientModal(){show(`<h2>Novo cliente</h2><form onsubmit="saveClient(event)"><div class="form"><div class="fg"><label>Nome / Razão Social</label><input id="cn" required></div><div class="fg"><label>CPF / CNPJ</label><input id="cd"></div><div class="fg"><label>WhatsApp</label><input id="cp"></div><div class="fg"><label>E-mail</label><input id="ce"></div><div class="fg"><label>Cidade</label><input id="cc"></div><div class="fg"><label>Vendedor</label><input id="cv"></div><div class="fg full"><label>Endereço</label><input id="ca"></div></div><br><button class="btn">Salvar</button> <button type="button" class="btn gray" onclick="close()">Cancelar</button></form>`)}
-function saveClient(e){e.preventDefault();db.clients.push({id:uid(),name:cn.value,doc:cd.value,phone:cp.value,email:ce.value,city:cc.value,seller:cv.value,address:ca.value});persist();close();render()}
-function productModal(){show(`<h2>Novo produto</h2><form onsubmit="saveProduct(event)"><div class="form"><div class="fg"><label>Produto</label><input id="pn" required></div><div class="fg"><label>Código</label><input id="pc"></div><div class="fg"><label>Preço de venda</label><input id="pp" type="number" step=".01" min="0" required></div><div class="fg"><label>Custo</label><input id="pco" type="number" step=".01" min="0"></div><div class="fg"><label>Estoque</label><input id="ps" type="number" step=".01" min="0" value="0"></div><div class="fg"><label>Estoque mínimo</label><input id="pm" type="number" step=".01" min="0" value="0"></div></div><br><button class="btn">Salvar</button> <button type="button" class="btn gray" onclick="close()">Cancelar</button></form>`)}
-function saveProduct(e){e.preventDefault();db.products.push({id:uid(),name:pn.value,code:pc.value,price:+pp.value,cost:+pco.value||0,stock:+ps.value||0,min:+pm.value||0});persist();close();render()}
-function newSale(){if(!db.clients.length||!db.products.length){alert('Cadastre clientes e produtos primeiro.');return}show(`<h2>Nova venda</h2><form onsubmit="saveSale(event)"><div class="form"><div class="fg"><label>Cliente</label><select id="sc">${db.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div><div class="fg"><label>Pagamento</label><select id="sp"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>Boleto</option><option>Transferência</option></select></div></div><div class="items"><div class="tools"><b>Itens da venda</b><button type="button" class="btn gray sm" onclick="addItem()">+ Item</button></div><div id="saleItems"></div></div><div class="total">Total: <span id="st">R$ 0,00</span></div><button class="btn ok">Finalizar venda</button> <button type="button" class="btn gray" onclick="close()">Cancelar</button></form>`);addItem()}
-function addItem(){let d=document.createElement('div');d.className='item';d.innerHTML=`<select class="ip" onchange="calc()">${db.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)}</option>`).join('')}</select><input class="iq" type="number" min=".01" step=".01" value="1" oninput="calc()"><input class="iprice" type="number" step=".01" min="0" value="${db.products[0].price}" oninput="calc()"><button type="button" class="btn red sm" onclick="this.parentNode.remove();calc()">×</button>`;$('saleItems').appendChild(d)}
-function calc(){let t=0;document.querySelectorAll('.item').forEach(x=>t+=(+x.querySelector('.iq').value||0)*(+x.querySelector('.iprice').value||0));$('st').textContent=money(t)}
-function saveSale(e){e.preventDefault();let items=[],total=0;document.querySelectorAll('.item').forEach(x=>{let p=db.products.find(p=>p.id==x.querySelector('.ip').value),q=+x.querySelector('.iq').value,pr=+x.querySelector('.iprice').value;if(p&&q>0){items.push({productId:p.id,name:p.name,qty:q,price:pr,cost:p.cost});total+=q*pr;p.stock=Math.max(0,p.stock-q)}});db.sales.push({id:uid(),date:new Date().toISOString(),clientId:+sc.value,payment:sp.value,total,items,status:sp.value==='Boleto'?'Pendente':'Pago'});persist();close();render()}
-function budgetModal(){if(!db.clients.length||!db.products.length){alert('Cadastre clientes e produtos primeiro.');return}show(`<h2>Novo orçamento</h2><form onsubmit="saveBudget(event)"><div class="form"><div class="fg"><label>Cliente</label><select id="bc">${db.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div><div class="fg"><label>Validade</label><input id="bv" type="date"></div></div><div class="items"><div class="tools"><b>Itens</b><button type="button" class="btn gray sm" onclick="addBItem()">+ Item</button></div><div id="budgetItems"></div></div><div class="total">Total: <span id="bt">R$ 0,00</span></div><button class="btn">Salvar orçamento</button> <button type="button" class="btn gray" onclick="close()">Cancelar</button></form>`);addBItem()}
-function addBItem(){let d=document.createElement('div');d.className='item';d.innerHTML=`<select class="bp" onchange="calcB()">${db.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)}</option>`).join('')}</select><input class="bq" type="number" min=".01" step=".01" value="1" oninput="calcB()"><input class="bprice" type="number" step=".01" min="0" value="${db.products[0].price}" oninput="calcB()"><button type="button" class="btn red sm" onclick="this.parentNode.remove();calcB()">×</button>`;$('budgetItems').appendChild(d)}
-function calcB(){let t=0;document.querySelectorAll('#budgetItems .item').forEach(x=>t+=(+x.querySelector('.bq').value||0)*(+x.querySelector('.bprice').value||0));$('bt').textContent=money(t)}
-function saveBudget(e){e.preventDefault();let items=[],total=0;document.querySelectorAll('#budgetItems .item').forEach(x=>{let p=db.products.find(p=>p.id==x.querySelector('.bp').value),q=+x.querySelector('.bq').value,pr=+x.querySelector('.bprice').value;items.push({name:p.name,qty:q,price:pr});total+=q*pr});db.budgets.push({id:uid(),date:new Date().toISOString(),validity:bv.value,clientId:+bc.value,total,items,status:'Aberto'});persist();close();render()}
-function del(type,i){if(confirm('Excluir registro?')){db[type].splice(i,1);persist();render()}}
-function clientName(id){return db.clients.find(c=>c.id==id)?.name||'—'}
-function renderClients(q=''){q=q.toLowerCase();let a=db.clients.filter(c=>(c.name+c.doc+c.phone+c.city).toLowerCase().includes(q));$('clients').innerHTML=`<table><tr><th>Cliente</th><th>Documento</th><th>WhatsApp</th><th>Cidade</th><th>Vendedor</th><th></th></tr>${a.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.doc)}</td><td>${esc(c.phone)}</td><td>${esc(c.city)}</td><td>${esc(c.seller)}</td><td><button class="btn red sm" onclick="del('clients',${db.clients.indexOf(c)})">Excluir</button></td></tr>`).join('')}</table>`}
-function renderProducts(q=''){q=q.toLowerCase();let a=db.products.filter(p=>(p.name+p.code).toLowerCase().includes(q));$('products').innerHTML=`<table><tr><th>Produto</th><th>Código</th><th>Preço</th><th>Custo</th><th>Estoque</th><th></th></tr>${a.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.code)}</td><td>${money(p.price)}</td><td>${money(p.cost)}</td><td>${p.stock<=p.min?'<span class="badge bad">'+p.stock+'</span>':'<span class="badge">'+p.stock+'</span>'}</td><td><button class="btn red sm" onclick="del('products',${db.products.indexOf(p)})">Excluir</button></td></tr>`).join('')}</table>`}
-function renderSales(){$('sales').innerHTML=`<table><tr><th>Data</th><th>Cliente</th><th>Pagamento</th><th>Total</th><th>Status</th></tr>${db.sales.slice().reverse().map(s=>`<tr><td>${new Date(s.date).toLocaleDateString('pt-BR')}</td><td>${esc(clientName(s.clientId))}</td><td>${s.payment}</td><td><b>${money(s.total)}</b></td><td>${s.status==='Pago'?'<span class="badge">Pago</span>':'<span class="badge warn">Pendente</span>'}</td></tr>`).join('')}</table>`}
-function renderBudgets(){$('budgets').innerHTML=db.budgets.length?`<table><tr><th>Data</th><th>Cliente</th><th>Validade</th><th>Total</th><th>Status</th></tr>${db.budgets.slice().reverse().map(b=>`<tr><td>${new Date(b.date).toLocaleDateString('pt-BR')}</td><td>${esc(clientName(b.clientId))}</td><td>${b.validity?new Date(b.validity+'T00:00').toLocaleDateString('pt-BR'):'—'}</td><td>${money(b.total)}</td><td><span class="badge warn">${b.status}</span></td></tr>`).join('')}</table>`:'<p>Nenhum orçamento.</p>'}
-function renderFinance(){let a=db.sales.filter(s=>s.status!=='Pago');$('finance').innerHTML=a.length?`<table><tr><th>Cliente</th><th>Venda</th><th>Valor</th><th>Status</th></tr>${a.map(s=>`<tr><td>${esc(clientName(s.clientId))}</td><td>${new Date(s.date).toLocaleDateString('pt-BR')}</td><td>${money(s.total)}</td><td><span class="badge warn">Pendente</span></td></tr>`).join('')}</table>`:'<p>Não há contas pendentes.</p>'}
-function renderDash(){let total=db.sales.reduce((a,s)=>a+s.total,0),paid=db.sales.filter(s=>s.status==='Pago').reduce((a,s)=>a+s.total,0);$('kSales').textContent=money(total);$('kPaid').textContent=money(paid);$('kOpen').textContent=money(total-paid);$('kClients').textContent=db.clients.length;$('ticket').textContent=money(db.sales.length?total/db.sales.length:0);$('nProd').textContent=db.products.length;$('nLow').textContent=db.products.filter(p=>p.stock<=p.min).length;$('nBud').textContent=db.budgets.filter(b=>b.status==='Aberto').length;$('dashSales').innerHTML=db.sales.length?`<table><tr><th>Cliente</th><th>Data</th><th>Total</th></tr>${db.sales.slice(-6).reverse().map(s=>`<tr><td>${esc(clientName(s.clientId))}</td><td>${new Date(s.date).toLocaleDateString('pt-BR')}</td><td>${money(s.total)}</td></tr>`).join('')}</table>`:'<p>Nenhuma venda registrada.</p>'}
-function renderReports(){let total=db.sales.reduce((a,s)=>a+s.total,0),cost=db.sales.reduce((a,s)=>a+s.items.reduce((z,i)=>z+i.qty*i.cost,0),0);$('rTotal').textContent=money(total);$('rCost').textContent=money(cost);$('rMargin').textContent=money(total-cost);$('rCount').textContent=db.sales.length;let m={};db.sales.forEach(s=>s.items.forEach(i=>m[i.name]=(m[i.name]||0)+i.qty));$('rProducts').innerHTML=Object.entries(m).sort((a,b)=>b[1]-a[1]).map(x=>`<p>${esc(x[0])}: <b>${x[1]}</b> unidades</p>`).join('')||'<p>Sem vendas.</p>'}
-function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_bemhes_vendas.json';a.click();URL.revokeObjectURL(a.href)}
-function render(){renderDash();renderClients();renderProducts();renderSales();renderBudgets();renderFinance();renderReports()}
-render();
+    // Dados carregados das tabelas fornecidas
+    let dadosGas = [
+        { pedido: 1, local: "AMIGÃO SUPERMECADO", compra: "2023-07-09", qtd: 1, valor: 120.00, inicio: "2023-07-09", fim: "2023-09-04", duracao: 57, status: "Finalizado" },
+        { pedido: 2, local: "AMIGÃO SUPERMECADO", compra: "2023-08-04", qtd: 1, valor: 99.90, inicio: "2023-09-04", fim: "2023-11-03", duracao: 60, status: "Finalizado" },
+        { pedido: 3, local: "AMIGÃO SUPERMECADO", compra: "2023-08-04", qtd: 1, valor: 99.90, inicio: "2023-11-03", fim: "2024-01-06", duracao: 64, status: "Finalizado" },
+        { pedido: 4, local: "BRUNO GÁS", compra: "2023-11-15", qtd: 1, valor: 100.00, inicio: "2024-01-06", fim: "2024-03-08", duracao: 62, status: "Finalizado" },
+        { pedido: 5, local: "Gás Corpinho", compra: "2024-03-03", qtd: 1, valor: 105.00, inicio: "2024-03-08", fim: "2024-05-17", duracao: 70, status: "Finalizado" },
+        { pedido: 6, local: "Gás Corpinho", compra: "2024-05-12", qtd: 1, valor: 99.99, inicio: "2024-05-17", fim: "2024-07-21", duracao: 65, status: "Finalizado" },
+        { pedido: 7, local: "Gás Corpinho", compra: "2024-06-30", qtd: 1, valor: 100.00, inicio: "2024-07-21", fim: "2024-12-09", duracao: 141, status: "Finalizado" },
+        { pedido: 8, local: "PARANÁ GÁS", compra: "2024-12-09", qtd: 1, valor: 110.00, inicio: "2024-12-09", fim: "2025-02-06", duracao: 59, status: "Finalizado" },
+        { pedido: 9, local: "Gás Corpinho", compra: "2025-02-06", qtd: 1, valor: 110.00, inicio: "2025-02-06", fim: "2025-04-09", duracao: 62, status: "Finalizado" },
+        { pedido: 10, local: "Gás Corpinho", compra: "2025-04-09", qtd: 1, valor: 110.00, inicio: "2025-04-09", fim: "2025-06-10", duracao: 62, status: "Finalizado" },
+        { pedido: 11, local: "Gás Corpinho", compra: "2025-05-31", qtd: 1, valor: 115.00, inicio: "2025-06-10", fim: "2025-07-28", duracao: 48, status: "Finalizado" },
+        { pedido: 12, local: "Gás Corpinho", compra: "2025-07-28", qtd: 1, valor: 100.00, inicio: "2025-07-28", fim: "2025-09-21", duracao: 55, status: "Finalizado" },
+        { pedido: 13, local: "Gás Corpinho", compra: "2025-07-28", qtd: 1, valor: 100.00, inicio: "2025-09-21", fim: "2025-11-25", duracao: 65, status: "Finalizado" },
+        { pedido: 14, local: "Gás Corpinho", compra: "2025-10-29", qtd: 1, valor: 105.00, inicio: "2025-11-25", fim: "2026-01-23", duracao: 59, status: "Finalizado" },
+        { pedido: 15, local: "Gás Corpinho", compra: "2025-10-29", qtd: 1, valor: 105.00, inicio: "2026-01-23", fim: "2026-03-16", duracao: 52, status: "Finalizado" },
+        { pedido: 16, local: "Gás Corpinho", compra: "2026-01-30", qtd: 1, valor: 105.00, inicio: "2026-03-16", fim: "2026-05-10", duracao: 55, status: "Finalizado" },
+        { pedido: 17, local: "Gás Corpinho", compra: "2026-05-08", qtd: 1, valor: 115.00, inicio: "2026-05-10", fim: "2026-07-05", duracao: 56, status: "Finalizado" },
+        { pedido: 18, local: "Gás Corpinho", compra: "2026-06-16", qtd: 1, valor: 115.00, inicio: "2026-07-05", fim: "2026-08-25", duracao: 51, status: "Finalizado" },
+        { pedido: 19, local: "Gás Corpinho", compra: "2026-08-25", qtd: 1, valor: 125.00, inicio: "2026-08-25", fim: "-", duracao: "Em uso", status: "Em Uso" }
+    ];
+
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-content-item').forEach(el => el.classList.add('d-none'));
+        document.getElementById('tab-' + tab).classList.remove('d-none');
+        document.querySelectorAll('.sidebar .nav-link').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
+    function carregarTabela() {
+        const tbody = document.querySelector('#tabelaPedidos tbody');
+        tbody.innerHTML = '';
+        dadosGas.forEach(item => {
+            const tr = document.createElement('tr');
+            const badgeClass = item.status === 'Em Uso' ? 'badge-status-em-uso' : 'badge-status-finalizado';
+            tr.innerHTML = `
+                <td><strong>#${item.pedido}</strong></td>
+                <td>${item.local}</td>
+                <td>${item.compra}</td>
+                <td>${item.qtd}</td>
+                <td>R$ ${item.valor.toFixed(2)}</td>
+                <td>${item.inicio}</td>
+                <td>${item.fim}</td>
+                <td>${item.duracao}</td>
+                <td><span class="badge ${badgeClass} p-2">${item.status}</span></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Inicialização dos Gráficos
+    function renderCharts() {
+        // Grafico de Duração
+        const finalizados = dadosGas.filter(d => d.status === 'Finalizado');
+        const ctxDuracao = document.getElementById('chartDuracao').getContext('2d');
+        new Chart(ctxDuracao, {
+            type: 'line',
+            data: {
+                labels: finalizados.map(d => 'Ped #' + d.pedido),
+                datasets: [{
+                    label: 'Duração (Dias)',
+                    data: finalizados.map(d => d.duracao),
+                    borderColor: '#e67e22',
+                    backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Grafico de Fornecedores
+        const fornecedoresCount = {};
+        dadosGas.forEach(d => {
+            fornecedoresCount[d.local] = (fornecedoresCount[d.local] || 0) + 1;
+        });
+
+        const ctxForn = document.getElementById('chartFornecedores').getContext('2d');
+        new Chart(ctxForn, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(fornecedoresCount),
+                datasets: [{
+                    data: Object.values(fornecedoresCount),
+                    backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f']
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
+
+    // Form submit
+    document.getElementById('formPedido').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const novo = {
+            pedido: dadosGas.length + 1,
+            local: document.getElementById('inputLocal').value,
+            compra: document.getElementById('inputDataCompra').value,
+            qtd: 1,
+            valor: parseFloat(document.getElementById('inputValor').value),
+            inicio: document.getElementById('inputInicioUso').value,
+            fim: "-",
+            duracao: "Em uso",
+            status: "Em Uso"
+        };
+        dadosGas.unshift(novo);
+        carregarTabela();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalNovoPedido'));
+        modal.hide();
+        alert('Novo registro adicionado com sucesso!');
+    });
+
+    window.onload = function() {
+        carregarTabela();
+        renderCharts();
+    };
 </script>
-</body></html>
+</body>
+</html>
+site_controle_de_gas.html
+Exibindo site_controle_de_gas.html.
