@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA DE CONTROLE DE GÁS - DASHBOARD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: var(--accent-color);
+        }
+        .kpi-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-3px);
+        }
+        .kpi-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .badge-status-em-uso {
+            background-color: #ffeaa7;
+            color: #d63031;
+            font-weight: bold;
+        }
+        .badge-status-finalizado {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <div class="d-flex align-items-center mb-4 text-white text-decoration-none">
+                <i class="bi bi-fire me-2 text-warning fs-3"></i>
+                <span class="fs-4 fw-bold">GásControl</span>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" id="nav-dashboard" onclick="switchTab('dashboard')">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard / Painel
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-pedidos" onclick="switchTab('pedidos')">
+                        <i class="bi bi-journal-text me-2"></i> Histórico de Pedidos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-locais" onclick="switchTab('locais')">
+                        <i class="bi bi-geo-alt me-2"></i> Locais de Compra
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            
+            <!-- Tab Dashboard -->
+            <div id="tab-dashboard" class="tab-content-item">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-speedometer2"></i> Dashboard de Controle</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0 gap-2">
+                        <button class="btn btn-outline-dark fw-bold" onclick="abrirModalNovoLocal()">
+                            <i class="bi bi-geo-alt-fill me-1"></i> + Local de Compra
+                        </button>
+                        <button class="btn btn-warning text-white fw-bold" onclick="abrirModalNovoPedido()">
+                            <i class="bi bi-plus-circle me-1"></i> Novo Botijão / Pedido
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Média de Duração</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-media-duracao">61.8 dias</h3>
+                                </div>
+                                <i class="bi bi-calendar-event kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Custo Médio / Botijão</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-custo-medio">R$ 108.67</h3>
+                                </div>
+                                <i class="bi bi-cash-stack kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Total de Pedidos</h6>
+                                    <h3 class="mb-0 fw-bold" id="kpi-total-pedidos">19</h3>
+                                </div>
+                                <i class="bi bi-box-seam kpi-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card kpi-card p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Gás em Uso Atual</h6>
+                                    <h3 class="mb-0 fw-bold text-danger" id="kpi-gas-uso">#19</h3>
+                                </div>
+                                <i class="bi bi-fire kpi-icon text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="table-container">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-graph-up-arrow"></i> Evolução da Duração (Dias por Botijão)</h5>
+                            <canvas id="chartDuracao" height="120"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="table-container">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-pie-chart"></i> Compras por Fornecedor</h5>
+                            <canvas id="chartFornecedores" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Pedidos -->
+            <div id="tab-pedidos" class="tab-content-item d-none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-journal-text"></i> Histórico Completo de Pedidos</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0 gap-2">
+                        <button class="btn btn-outline-dark fw-bold" onclick="abrirModalNovoLocal()">
+                            <i class="bi bi-geo-alt-fill me-1"></i> + Local de Compra
+                        </button>
+                        <button class="btn btn-warning text-white fw-bold" onclick="abrirModalNovoPedido()">
+                            <i class="bi bi-plus-circle me-1"></i> Registrar Compra
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="tabelaPedidos">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Local de Compra</th>
+                                    <th>Data Compra</th>
+                                    <th>Qtd</th>
+                                    <th>Valor Unit. (R$)</th>
+                                    <th>Início Uso</th>
+                                    <th>Fim Uso</th>
+                                    <th>Duração (dias)</th>
+                                    <th>Status</th>
+                                    <th style="min-width: 140px;">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Locais -->
+            <div id="tab-locais" class="tab-content-item d-none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2"><i class="bi bi-geo-alt"></i> Locais de Compra Cadastrados</h1>
+                    <button class="btn btn-primary fw-bold" onclick="abrirModalNovoLocal()">
+                        <i class="bi bi-plus-lg me-1"></i> Incluir Local de Compra
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="table-container">
+                            <table class="table table-striped align-middle" id="tabelaLocais">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Local de Compra</th>
+                                        <th>Cidade</th>
+                                        <th style="width: 120px;">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Preenchido via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- Modal Pedido (Criar / Editar) -->
+<div class="modal fade" id="modalPedido" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title fw-bold" id="modalPedidoTitle"><i class="bi bi-plus-circle"></i> Novo Lançamento de Gás</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formPedido">
+            <input type="hidden" id="editPedidoId" value="">
+            <div class="mb-3">
+                <label class="form-label">Local de Compra</label>
+                <select class="form-select" id="inputLocal" required>
+                    <!-- Preenchido dinamicamente -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Data de Compra</label>
+                <input type="date" class="form-control" id="inputDataCompra" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Valor Unitário (R$)</label>
+                <input type="number" step="0.01" class="form-control" id="inputValor" required value="125.00">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Início do Uso</label>
+                <input type="date" class="form-control" id="inputInicioUso" required>
+            </div>
+            <div class="mb-3" id="groupFimUso" style="display:none;">
+                <label class="form-label">Fim do Uso (Deixe em branco se em uso)</label>
+                <input type="date" class="form-control" id="inputFimUso">
+            </div>
+            <button type="submit" class="btn btn-warning text-white w-100 fw-bold" id="btnSalvarPedido">Salvar Registro</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Local de Compra (Criar / Editar) -->
+<div class="modal fade" id="modalLocal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="modalLocalTitle"><i class="bi bi-geo-alt-fill"></i> Incluir Local de Compra</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formLocal">
+            <input type="hidden" id="editLocalId" value="">
+            <div class="mb-3">
+                <label class="form-label">Nome do Estabelecimento / Fornecedor</label>
+                <input type="text" class="form-control" id="inputNomeLocal" placeholder="Ex: ULTRAGAZ MANDAGUARI" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="inputCidadeLocal" value="MANDAGUARI" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 fw-bold" id="btnSalvarLocal">Cadastrar Local</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Finalizar Uso -->
+<div class="modal fade" id="modalFinalizarUso" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title fw-bold"><i class="bi bi-check-circle-fill"></i> Finalizar Uso do Botijão</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formFinalizarUso">
+            <input type="hidden" id="finalizarPedidoId">
+            <div class="mb-3">
+                <label class="form-label">Data de Término do Uso</label>
+                <input type="date" class="form-control" id="inputDataFimUso" required>
+            </div>
+            <p class="text-muted small">Ao finalizar, a duração exata em dias será calculada e atualizada no painel.</p>
+            <button type="submit" class="btn btn-success w-100 fw-bold">Confirmar Término de Uso</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Locais Cadastrados (com ID)
+    let locaisCompra = [
+        { id: 1, nome: "AMIGÃO SUPERMECADO", cidade: "MANDAGUARI" },
+        { id: 2, nome: "BRUNO GÁS", cidade: "Mandaguari" },
+        { id: 3, nome: "Gás Corpinho", cidade: "Mandaguari" },
+        { id: 4, nome: "PARANÁ GÁS", cidade: "MANDAGUARA" }
+    ];
+
+    // Dados de Pedidos
+    let dadosGas = [
+        { pedido: 1, local: "AMIGÃO SUPERMECADO", compra: "2023-07-09", qtd: 1, valor: 120.00, inicio: "2023-07-09", fim: "2023-09-04", duracao: 57, status: "Finalizado" },
+        { pedido: 2, local: "AMIGÃO SUPERMECADO", compra: "2023-08-04", qtd: 1, valor: 99.90, inicio: "2023-09-04", fim: "2023-11-03", duracao: 60, status: "Finalizado" },
+        { pedido: 3, local: "AMIGÃO SUPERMECADO", compra: "2023-08-04", qtd: 1, valor: 99.90, inicio: "2023-11-03", fim: "2024-01-06", duracao: 64, status: "Finalizado" },
+        { pedido: 4, local: "BRUNO GÁS", compra: "2023-11-15", qtd: 1, valor: 100.00, inicio: "2024-01-06", fim: "2024-03-08", duracao: 62, status: "Finalizado" },
+        { pedido: 5, local: "Gás Corpinho", compra: "2024-03-03", qtd: 1, valor: 105.00, inicio: "2024-03-08", fim: "2024-05-17", duracao: 70, status: "Finalizado" },
+        { pedido: 6, local: "Gás Corpinho", compra: "2024-05-12", qtd: 1, valor: 99.99, inicio: "2024-05-17", fim: "2024-07-21", duracao: 65, status: "Finalizado" },
+        { pedido: 7, local: "Gás Corpinho", compra: "2024-06-30", qtd: 1, valor: 100.00, inicio: "2024-07-21", fim: "2024-12-09", duracao: 141, status: "Finalizado" },
+        { pedido: 8, local: "PARANÁ GÁS", compra: "2024-12-09", qtd: 1, valor: 110.00, inicio: "2024-12-09", fim: "2025-02-06", duracao: 59, status: "Finalizado" },
+        { pedido: 9, local: "Gás Corpinho", compra: "2025-02-06", qtd: 1, valor: 110.00, inicio: "2025-02-06", fim: "2025-04-09", duracao: 62, status: "Finalizado" },
+        { pedido: 10, local: "Gás Corpinho", compra: "2025-04-09", qtd: 1, valor: 110.00, inicio: "2025-04-09", fim: "2025-06-10", duracao: 62, status: "Finalizado" },
+        { pedido: 11, local: "Gás Corpinho", compra: "2025-05-31", qtd: 1, valor: 115.00, inicio: "2025-06-10", fim: "2025-07-28", duracao: 48, status: "Finalizado" },
+        { pedido: 12, local: "Gás Corpinho", compra: "2025-07-28", qtd: 1, valor: 100.00, inicio: "2025-07-28", fim: "2025-09-21", duracao: 55, status: "Finalizado" },
+        { pedido: 13, local: "Gás Corpinho", compra: "2025-07-28", qtd: 1, valor: 100.00, inicio: "2025-09-21", fim: "2025-11-25", duracao: 65, status: "Finalizado" },
+        { pedido: 14, local: "Gás Corpinho", compra: "2025-10-29", qtd: 1, valor: 105.00, inicio: "2025-11-25", fim: "2026-01-23", duracao: 59, status: "Finalizado" },
+        { pedido: 15, local: "Gás Corpinho", compra: "2025-10-29", qtd: 1, valor: 105.00, inicio: "2026-01-23", fim: "2026-03-16", duracao: 52, status: "Finalizado" },
+        { pedido: 16, local: "Gás Corpinho", compra: "2026-01-30", qtd: 1, valor: 105.00, inicio: "2026-03-16", fim: "2026-05-10", duracao: 55, status: "Finalizado" },
+        { pedido: 17, local: "Gás Corpinho", compra: "2026-05-08", qtd: 1, valor: 115.00, inicio: "2026-05-10", fim: "2026-07-05", duracao: 56, status: "Finalizado" },
+        { pedido: 18, local: "Gás Corpinho", compra: "2026-06-16", qtd: 1, valor: 115.00, inicio: "2026-07-05", fim: "2026-08-25", duracao: 51, status: "Finalizado" },
+        { pedido: 19, local: "Gás Corpinho", compra: "2026-08-25", qtd: 1, valor: 125.00, inicio: "2026-08-25", fim: "-", duracao: "Em uso", status: "Em Uso" }
+    ];
+
+    let chartDuracaoInstance = null;
+    let chartFornecedoresInstance = null;
+
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-content-item').forEach(el => el.classList.add('d-none'));
+        document.getElementById('tab-' + tab).classList.remove('d-none');
+        document.querySelectorAll('.sidebar .nav-link').forEach(el => el.classList.remove('active'));
+        document.getElementById('nav-' + tab).classList.add('active');
+    }
+
+    function atualizarSelectLocais() {
+        const select = document.getElementById('inputLocal');
+        select.innerHTML = '';
+        locaisCompra.forEach(loc => {
+            const opt = document.createElement('option');
+            opt.value = loc.nome;
+            opt.textContent = loc.nome + ' (' + loc.cidade + ')';
+            select.appendChild(opt);
+        });
+    }
+
+    function carregarTabelaLocais() {
+        const tbody = document.querySelector('#tabelaLocais tbody');
+        tbody.innerHTML = '';
+        locaisCompra.forEach(loc => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>#${loc.id}</td>
+                <td><strong>${loc.nome}</strong></td>
+                <td>${loc.cidade}</td>
+                <td class="action-btns">
+                    <button class="btn btn-sm btn-outline-primary me-1" onclick="editarLocal(${loc.id})" title="Editar"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="excluirLocal(${loc.id})" title="Excluir"><i class="bi bi-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function carregarTabelaPedidos() {
+        const tbody = document.querySelector('#tabelaPedidos tbody');
+        tbody.innerHTML = '';
+        dadosGas.forEach(item => {
+            const tr = document.createElement('tr');
+            let statusHtml = '';
+            let btnFinalizar = '';
+
+            if (item.status === 'Em Uso') {
+                statusHtml = `<span class="badge badge-status-em-uso p-2">Em Uso</span>`;
+                btnFinalizar = `<button class="btn btn-sm btn-success fw-bold me-1" onclick="abrirModalFinalizar(${item.pedido})" title="Finalizar Uso"><i class="bi bi-check2-circle"></i></button>`;
+            } else {
+                statusHtml = `<span class="badge badge-status-finalizado p-2">Finalizado</span>`;
+            }
+
+            tr.innerHTML = `
+                <td><strong>#${item.pedido}</strong></td>
+                <td>${item.local}</td>
+                <td>${item.compra}</td>
+                <td>${item.qtd}</td>
+                <td>R$ ${item.valor.toFixed(2)}</td>
+                <td>${item.inicio}</td>
+                <td>${item.fim}</td>
+                <td>${item.duracao}</td>
+                <td>${statusHtml}</td>
+                <td class="action-btns">
+                    ${btnFinalizar}
+                    <button class="btn btn-sm btn-outline-primary me-1" onclick="editarPedido(${item.pedido})" title="Editar"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="excluirPedido(${item.pedido})" title="Excluir"><i class="bi bi-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function recalcularKPIs() {
+        const finalizados = dadosGas.filter(d => d.status === 'Finalizado');
+        const totalDuracao = finalizados.reduce((acc, cur) => acc + Number(cur.duracao), 0);
+        const mediaDuracao = finalizados.length > 0 ? (totalDuracao / finalizados.length).toFixed(1) : 0;
+        
+        const totalCusto = dadosGas.reduce((acc, cur) => acc + Number(cur.valor), 0);
+        const custoMedio = dadosGas.length > 0 ? (totalCusto / dadosGas.length).toFixed(2) : 0;
+
+        document.getElementById('kpi-media-duracao').textContent = mediaDuracao + ' dias';
+        document.getElementById('kpi-custo-medio').textContent = 'R$ ' + custoMedio;
+        document.getElementById('kpi-total-pedidos').textContent = dadosGas.length;
+        
+        const emUsoObj = dadosGas.find(d => d.status === 'Em Uso');
+        document.getElementById('kpi-gas-uso').textContent = emUsoObj ? '#' + emUsoObj.pedido : 'Nenhum';
+    }
+
+    function renderCharts() {
+        if (chartDuracaoInstance) chartDuracaoInstance.destroy();
+        if (chartFornecedoresInstance) chartFornecedoresInstance.destroy();
+
+        const finalizados = [...dadosGas].filter(d => d.status === 'Finalizado').reverse();
+        const ctxDuracao = document.getElementById('chartDuracao').getContext('2d');
+        chartDuracaoInstance = new Chart(ctxDuracao, {
+            type: 'line',
+            data: {
+                labels: finalizados.map(d => 'Ped #' + d.pedido),
+                datasets: [{
+                    label: 'Duração (Dias)',
+                    data: finalizados.map(d => d.duracao),
+                    borderColor: '#e67e22',
+                    backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        const fornecedoresCount = {};
+        dadosGas.forEach(d => {
+            fornecedoresCount[d.local] = (fornecedoresCount[d.local] || 0) + 1;
+        });
+
+        const ctxForn = document.getElementById('chartFornecedores').getContext('2d');
+        chartFornecedoresInstance = new Chart(ctxForn, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(fornecedoresCount),
+                datasets: [{
+                    data: Object.values(fornecedoresCount),
+                    backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#1abc9c']
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
+
+    // --- MANIPULAÇÃO DE PEDIDOS (NOVO, EDITAR, EXCLUIR) ---
+    function abrirModalNovoPedido() {
+        document.getElementById('editPedidoId').value = "";
+        document.getElementById('modalPedidoTitle').innerHTML = '<i class="bi bi-plus-circle"></i> Novo Lançamento de Gás';
+        document.getElementById('btnSalvarPedido').textContent = "Salvar Registro";
+        document.getElementById('groupFimUso').style.display = "none";
+        document.getElementById('formPedido').reset();
+        
+        atualizarSelectLocais();
+        const modal = new bootstrap.Modal(document.getElementById('modalPedido'));
+        modal.show();
+    }
+
+    function editarPedido(id) {
+        const ped = dadosGas.find(d => d.pedido === id);
+        if (!ped) return;
+
+        atualizarSelectLocais();
+        document.getElementById('editPedidoId').value = ped.pedido;
+        document.getElementById('modalPedidoTitle').innerHTML = `<i class="bi bi-pencil-square"></i> Editar Pedido #${ped.pedido}`;
+        document.getElementById('btnSalvarPedido').textContent = "Atualizar Registro";
+        
+        document.getElementById('inputLocal').value = ped.local;
+        document.getElementById('inputDataCompra').value = ped.compra;
+        document.getElementById('inputValor').value = ped.valor;
+        document.getElementById('inputInicioUso').value = ped.inicio;
+        
+        document.getElementById('groupFimUso').style.display = "block";
+        document.getElementById('inputFimUso').value = ped.fim !== '-' ? ped.fim : '';
+
+        const modal = new bootstrap.Modal(document.getElementById('modalPedido'));
+        modal.show();
+    }
+
+    function excluirPedido(id) {
+        if (confirm(`Tem certeza que deseja excluir o Pedido #${id}?`)) {
+            dadosGas = dadosGas.filter(d => d.pedido !== id);
+            carregarTabelaPedidos();
+            recalcularKPIs();
+            renderCharts();
+        }
+    }
+
+    document.getElementById('formPedido').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const editId = document.getElementById('editPedidoId').value;
+        const localVal = document.getElementById('inputLocal').value;
+        const compraVal = document.getElementById('inputDataCompra').value;
+        const valorVal = parseFloat(document.getElementById('inputValor').value);
+        const inicioVal = document.getElementById('inputInicioUso').value;
+        const fimVal = document.getElementById('inputFimUso').value;
+
+        if (editId) {
+            // Edição
+            const ped = dadosGas.find(d => d.pedido === parseInt(editId));
+            if (ped) {
+                ped.local = localVal;
+                ped.compra = compraVal;
+                ped.valor = valorVal;
+                ped.inicio = inicioVal;
+                
+                if (fimVal && fimVal.trim() !== '') {
+                    ped.fim = fimVal;
+                    ped.status = 'Finalizado';
+                    const dInicio = new Date(inicioVal);
+                    const dFim = new Date(fimVal);
+                    const diffTime = Math.abs(dFim - dInicio);
+                    ped.duracao = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                } else {
+                    ped.fim = '-';
+                    ped.status = 'Em Uso';
+                    ped.duracao = 'Em uso';
+                }
+            }
+        } else {
+            // Novo
+            const novo = {
+                pedido: dadosGas.length > 0 ? Math.max(...dadosGas.map(d => d.pedido)) + 1 : 1,
+                local: localVal,
+                compra: compraVal,
+                qtd: 1,
+                valor: valorVal,
+                inicio: inicioVal,
+                fim: "-",
+                duracao: "Em uso",
+                status: "Em Uso"
+            };
+            dadosGas.unshift(novo);
+        }
+
+        carregarTabelaPedidos();
+        recalcularKPIs();
+        renderCharts();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalPedido'));
+        modal.hide();
+        this.reset();
+    });
+
+    // --- MANIPULAÇÃO DE LOCAIS (NOVO, EDITAR, EXCLUIR) ---
+    function abrirModalNovoLocal() {
+        document.getElementById('editLocalId').value = "";
+        document.getElementById('modalLocalTitle').innerHTML = '<i class="bi bi-geo-alt-fill"></i> Incluir Local de Compra';
+        document.getElementById('btnSalvarLocal').textContent = "Cadastrar Local";
+        document.getElementById('formLocal').reset();
+        document.getElementById('inputCidadeLocal').value = "MANDAGUARI";
+        const modal = new bootstrap.Modal(document.getElementById('modalLocal'));
+        modal.show();
+    }
+
+    function editarLocal(id) {
+        const loc = locaisCompra.find(l => l.id === id);
+        if (!loc) return;
+
+        document.getElementById('editLocalId').value = loc.id;
+        document.getElementById('modalLocalTitle').innerHTML = `<i class="bi bi-pencil-square"></i> Editar Local #${loc.id}`;
+        document.getElementById('btnSalvarLocal').textContent = "Atualizar Local";
+        
+        document.getElementById('inputNomeLocal').value = loc.nome;
+        document.getElementById('inputCidadeLocal').value = loc.cidade;
+
+        const modal = new bootstrap.Modal(document.getElementById('modalLocal'));
+        modal.show();
+    }
+
+    function excluirLocal(id) {
+        const loc = locaisCompra.find(l => l.id === id);
+        if (!loc) return;
+
+        if (confirm(`Tem certeza que deseja excluir o local "${loc.nome}"?`)) {
+            locaisCompra = locaisCompra.filter(l => l.id !== id);
+            atualizarSelectLocais();
+            carregarTabelaLocais();
+        }
+    }
+
+    document.getElementById('formLocal').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const editId = document.getElementById('editLocalId').value;
+        const novoNome = document.getElementById('inputNomeLocal').value.trim();
+        const novaCidade = document.getElementById('inputCidadeLocal').value.trim();
+
+        if (editId) {
+            // Edição
+            const loc = locaisCompra.find(l => l.id === parseInt(editId));
+            if (loc) {
+                loc.nome = novoNome;
+                loc.cidade = novaCidade;
+            }
+        } else {
+            // Novo
+            const novoId = locaisCompra.length > 0 ? Math.max(...locaisCompra.map(l => l.id)) + 1 : 1;
+            locaisCompra.push({ id: novoId, nome: novoNome, cidade: novaCidade });
+        }
+
+        atualizarSelectLocais();
+        carregarTabelaLocais();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalLocal'));
+        modal.hide();
+        this.reset();
+    });
+
+    // --- FINALIZAR USO ---
+    function abrirModalFinalizar(pedidoId) {
+        document.getElementById('finalizarPedidoId').value = pedidoId;
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('inputDataFimUso').value = today;
+        const modal = new bootstrap.Modal(document.getElementById('modalFinalizarUso'));
+        modal.show();
+    }
+
+    document.getElementById('formFinalizarUso').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const id = parseInt(document.getElementById('finalizarPedidoId').value);
+        const dataFim = document.getElementById('inputDataFimUso').value;
+
+        const pedido = dadosGas.find(d => d.pedido === id);
+        if (pedido) {
+            pedido.fim = dataFim;
+            pedido.status = 'Finalizado';
+            
+            const dInicio = new Date(pedido.inicio);
+            const dFim = new Date(dataFim);
+            const diffTime = Math.abs(dFim - dInicio);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            pedido.duracao = diffDays;
+
+            carregarTabelaPedidos();
+            recalcularKPIs();
+            renderCharts();
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById('modalFinalizarUso'));
+            modal.hide();
+        }
+    });
+
+    window.onload = function() {
+        atualizarSelectLocais();
+        carregarTabelaLocais();
+        carregarTabelaPedidos();
+        recalcularKPIs();
+        renderCharts();
+    };
+</script>
+</body>
+</html>
